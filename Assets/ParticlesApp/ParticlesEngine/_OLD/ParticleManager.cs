@@ -209,7 +209,7 @@ public class ParticleManager : MonoBehaviour {
 
   void OnPostRender() {
     _computeMaterial.SetPass(0);
-    Graphics.DrawProcedural(MeshTopology.Points, NUM_PARTICLES);
+    Graphics.DrawProceduralNow(MeshTopology.Points, NUM_PARTICLES);
   }
 
   //-------------------------------------------

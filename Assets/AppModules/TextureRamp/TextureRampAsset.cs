@@ -28,7 +28,7 @@ public class TextureRampAsset : ScriptableObject {
   private Texture2D _texture;
 
   public void UpdateTextureAsset() {
-    _texture.Resize(_textureResolution, 1);
+    _texture.Reinitialize(_textureResolution, 1);
 
     Color32[] pixels = new Color32[_textureResolution];
 
@@ -41,7 +41,7 @@ public class TextureRampAsset : ScriptableObject {
       pixels[i] = _gradient.Evaluate(percent);
     }
 
-    _texture.Resize(_textureResolution, 1);
+    _texture.Reinitialize(_textureResolution, 1);
     _texture.wrapMode = _wrapMode;
     _texture.filterMode = _filterMode;
 #if UNITY_EDITOR

@@ -9,7 +9,8 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.VR;
+//ToDo : Uncomment
+//using UnityEngine.VR;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;

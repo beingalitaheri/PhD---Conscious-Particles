@@ -533,7 +533,7 @@ namespace Leap.Unity.GraphicalRenderer {
           //new graphics, or it is greater than _graphics.Count because we removed
           //some graphics.
           for (int i = newGraphicStart; i < _graphics.Count; i++) {
-            var anchor = _renderer.space == null ? null : LeapSpaceAnchor.GetAnchor(attachEnum.Current.transform);
+            var anchor = _renderer.space == null ? null : attachEnum.Current == null ? null :  LeapSpaceAnchor.GetAnchor(attachEnum.Current.transform);
             _graphics[i].OnAttachedToGroup(this, anchor);
           }
 

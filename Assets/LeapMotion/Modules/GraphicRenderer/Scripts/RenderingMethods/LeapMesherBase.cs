@@ -222,9 +222,10 @@ namespace Leap.Unity.GraphicalRenderer {
       SupportUtil.OnlySupportFirstFeature<LeapSpriteFeature>(info);
 
 #if UNITY_EDITOR
-      if (!Application.isPlaying) {
+      //ToDo : Uncomment
+      /*if (!Application.isPlaying) {
         Packer.RebuildAtlasCacheIfNeeded(EditorUserBuildSettings.activeBuildTarget);
-      }
+      }*/
 
       for (int i = 0; i < features.Count; i++) {
         var feature = features[i];
@@ -376,9 +377,10 @@ namespace Leap.Unity.GraphicalRenderer {
         }
 
         if (_spriteFeatures.Count != 0) {
-#if UNITY_EDITOR
+          //ToDo : Uncomment
+/*#if UNITY_EDITOR
           Packer.RebuildAtlasCacheIfNeeded(EditorUserBuildSettings.activeBuildTarget);
-#endif
+#endif*/
           extractSpriteRects();
           uploadSpriteTextures();
         }
