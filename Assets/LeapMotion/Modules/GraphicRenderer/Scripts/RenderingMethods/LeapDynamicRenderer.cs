@@ -114,7 +114,11 @@ namespace Leap.Unity.GraphicalRenderer {
                 _curved_worldToAnchor.Add(Matrix4x4.identity);
                 continue;
               }
-
+              
+              if (graphic.anchor == null)
+              {
+                return;
+              }
               var transformer = graphic.anchor.transformer;
 
               Vector3 localPos = renderer.transform.InverseTransformPoint(graphic.transform.position);

@@ -7,7 +7,7 @@ public class MakeTextureArrayAsset : MonoBehaviour {
 
   [ContextMenu("Make Asset")]
   public void MakeAsset() {
-    Texture2DArray array = new Texture2DArray(textures[0].width, textures[0].height, textures.Length, textures[0].format, mipmap: false, linear: true);
+    Texture2DArray array = new Texture2DArray(textures[0].width, textures[0].height, textures.Length, textures[0].format, mipChain: false, linear: true);
     for (int i = 0; i < textures.Length; i++) {
       Graphics.CopyTexture(textures[i], 0, array, i);
     }

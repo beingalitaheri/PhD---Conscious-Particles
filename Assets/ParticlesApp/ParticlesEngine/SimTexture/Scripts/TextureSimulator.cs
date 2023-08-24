@@ -865,7 +865,7 @@ public class TextureSimulator : MonoBehaviour {
       return;
     }
 
-    Texture2D ramp = new Texture2D(TAIL_RAMP_RESOLUTION, 1, TextureFormat.Alpha8, mipmap: false, linear: true);
+    Texture2D ramp = new Texture2D(TAIL_RAMP_RESOLUTION, 1, TextureFormat.Alpha8, mipChain: false, linear: true);
     for (int i = 0; i < TAIL_RAMP_RESOLUTION; i++) {
       float speed = i / (float)TAIL_RAMP_RESOLUTION;
       float length = _manager.speedToTrailLength.Evaluate(speed) * _manager.trailSize;
@@ -887,9 +887,9 @@ public class TextureSimulator : MonoBehaviour {
     BuildDisplayMeshes();
 
     _displayBlock = new MaterialPropertyBlock();
-    _displayColorA = new Texture2D(SimulationManager.TEXTURE_SIZE, SimulationManager.TEXTURE_SIZE, TextureFormat.ARGB32, mipmap: false, linear: true);
+    _displayColorA = new Texture2D(SimulationManager.TEXTURE_SIZE, SimulationManager.TEXTURE_SIZE, TextureFormat.ARGB32, mipChain: false, linear: true);
     _displayColorA.filterMode = FilterMode.Point;
-    _displayColorB = new Texture2D(SimulationManager.TEXTURE_SIZE, SimulationManager.TEXTURE_SIZE, TextureFormat.ARGB32, mipmap: false, linear: true);
+    _displayColorB = new Texture2D(SimulationManager.TEXTURE_SIZE, SimulationManager.TEXTURE_SIZE, TextureFormat.ARGB32, mipChain: false, linear: true);
     _displayColorB.filterMode = FilterMode.Point;
     _handActors.Fill(() => new HandActor(this));
   }
@@ -1101,7 +1101,7 @@ public class TextureSimulator : MonoBehaviour {
               Texture2D randomTexture = new Texture2D(SimulationManager.TEXTURE_SIZE,
                                                       SimulationManager.TEXTURE_SIZE,
                                                       TextureFormat.RGBAFloat,
-                                                      mipmap: false,
+                                                      mipChain: false,
                                                       linear: true);
               randomTexture.filterMode = FilterMode.Point;
               randomTexture.SetPixels(new Color[SimulationManager.MAX_PARTICLES].Fill(() => (Vector4)Random.insideUnitSphere * _manager.fieldRadius));
@@ -1249,7 +1249,7 @@ public class TextureSimulator : MonoBehaviour {
 
     Texture2D layoutTex = null;
     if (_layoutDebug != null && _layoutDebug.gameObject.activeInHierarchy) {
-      layoutTex = new Texture2D(_textureDimension, _textureDimension, TextureFormat.ARGB32, mipmap: false);
+      layoutTex = new Texture2D(_textureDimension, _textureDimension, TextureFormat.ARGB32, mipChain: false);
       layoutTex.filterMode = FilterMode.Point;
       layoutTex.wrapMode = TextureWrapMode.Clamp;
       _layoutDebug.material.mainTexture = layoutTex;
@@ -1294,14 +1294,14 @@ public class TextureSimulator : MonoBehaviour {
     }
 
     Texture2D tex;
-    tex = new Texture2D(_textureDimension, _textureDimension, format, mipmap: false, linear: true);
+    tex = new Texture2D(_textureDimension, _textureDimension, format, mipChain: false, linear: true);
     tex.SetPixels(positionColors);
     tex.Apply();
 
     blitCopy(tex, _positionSrc);
     DestroyImmediate(tex);
 
-    tex = new Texture2D(_textureDimension, _textureDimension, format, mipmap: false, linear: true);
+    tex = new Texture2D(_textureDimension, _textureDimension, format, mipChain: false, linear: true);
     tex.SetPixels(velocityColors);
     tex.Apply();
 

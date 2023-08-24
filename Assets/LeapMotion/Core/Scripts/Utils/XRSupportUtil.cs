@@ -11,6 +11,8 @@ using UnityEngine;
 
 #if UNITY_2017_2_OR_NEWER
 using UnityEngine.XR;
+using VrExtensions;
+
 #else
 using UnityEngine.VR;
 #endif
@@ -33,7 +35,7 @@ namespace Leap.Unity {
 
     public static bool IsXRDevicePresent() {
       #if UNITY_2017_2_OR_NEWER
-      return XRDevice.isPresent;
+      return VrIsPresent.isPresent();
       #else
       return VRDevice.isPresent;
       #endif
@@ -41,7 +43,7 @@ namespace Leap.Unity {
 
     static bool outputPresenceWarning = false;
     public static bool IsUserPresent(bool defaultPresence = true) {
-      #if UNITY_2017_2_OR_NEWER
+      /*#if UNITY_2017_2_OR_NEWER
       var userPresence = XRDevice.userPresence;
       if (userPresence == UserPresenceState.Present) {
         return true;
@@ -54,7 +56,7 @@ namespace Leap.Unity {
         Debug.LogWarning("XR UserPresenceState is only supported in 2017.2 and newer.");
         outputPresenceWarning = true;
       }
-      #endif
+      #endif*/
       return defaultPresence;
     }
 
