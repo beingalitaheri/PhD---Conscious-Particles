@@ -336,7 +336,7 @@ namespace Leap.Unity.Interaction {
           _fingertipTransforms[i] = _backingFingertipTransforms[i];
 
           Finger finger = leapHand.Fingers[i];
-          _fingertipTransforms[i].position = finger.TipPosition.ToVector3();
+          //_fingertipTransforms[i].position = finger.TipPosition.ToVector3();
           _fingertipTransforms[i].rotation = finger.bones[3].Rotation.ToQuaternion();
         }
         else {

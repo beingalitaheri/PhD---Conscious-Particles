@@ -996,7 +996,7 @@ namespace Leap.Unity.Interaction {
       using (new ProfilerSample("Update Contact Bones")) {
         normalizeBoneMasses();
         for (int i = 0; i < contactBones.Length; i++) {
-          updateContactBone(i, _boneTargetPositions[i], _boneTargetRotations[i]);
+          //updateContactBone(i, _boneTargetPositions[i], _boneTargetRotations[i]);
         }
       }
       using (new ProfilerSample("Update Soft Contact")) {

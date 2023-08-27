@@ -131,7 +131,7 @@ namespace Leap {
           transform.rotation = angleAxis(0f * Constants.DEG_TO_RAD, Vector.Forward)
                                 .Multiply(angleAxis(-90f * Constants.DEG_TO_RAD, Vector.Right))
                                 .Multiply(angleAxis(180f * Constants.DEG_TO_RAD, Vector.Up));
-          transform.translation = new Vector(120f, 0f, -170f);
+          //transform.translation = new Vector(120f, 0f, -170f);
           break;
       }
       return transform;
