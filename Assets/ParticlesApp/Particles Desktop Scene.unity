@@ -3166,6 +3166,37 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.013
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &833739189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833739191}
+  m_Layer: 0
+  m_Name: Simulation Mode Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &833739191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833739189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.31436157, y: 0.02696228, z: 0.54455566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &836937210
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,6 +4586,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238655029}
   m_CullTransparentMesh: 1
+--- !u!1 &1285330572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285330575}
+  - component: {fileID: 1285330574}
+  - component: {fileID: 1285330573}
+  m_Layer: 0
+  m_Name: DevGUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1285330573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285330572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d384bd7c588b83c43bacb85095c4e0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setters: {fileID: 0}
+  simManager: {fileID: 1217747524}
+  genManager: {fileID: 1536580951}
+  resetController: {fileID: 0}
+--- !u!114 &1285330574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285330572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410ec3104433c2947a4f2d5a66626def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showGui: 1
+  _windowName: -- Particle Controls (F11 to close) --
+--- !u!4 &1285330575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285330572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.7347097, y: -3.0091481, z: 1.2147582}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1335697067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6857,7 +6951,7 @@ PrefabInstance:
     - target: {fileID: 114400310488889472, guid: dbf21c827b31f9b4bb60b68e2a2c6497,
         type: 3}
       propertyPath: _drawControllerRuntimeGizmos
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114447940872530456, guid: dbf21c827b31f9b4bb60b68e2a2c6497,
         type: 3}
@@ -7387,3 +7481,5 @@ SceneRoots:
   - {fileID: 1924436570}
   - {fileID: 397193955}
   - {fileID: 1748117469}
+  - {fileID: 833739191}
+  - {fileID: 1285330575}
