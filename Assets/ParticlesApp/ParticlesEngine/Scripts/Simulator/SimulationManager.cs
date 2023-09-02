@@ -582,13 +582,13 @@ public class SimulationManager : MonoBehaviour {
     }
   }
 
-  private void Update() {
+  /*private void Update() {
     // Commented out to prevent typing into simulation seed name field from overlapping
     // and activating keyboard commands.
     //handleUserInput();
-  }
+  }*/
 
-  private void OnGUI() {
+  /*private void OnGUI() {
     //_showScreenGUI = GUILayout.Toggle(_showScreenGUI, "Show GUI");
     //if (_showScreenGUI) {
     //  _inGui = true;
@@ -599,7 +599,7 @@ public class SimulationManager : MonoBehaviour {
     //    GUILayout.Label(_currentDescription.name);
     //  }
     //}
-  }
+  }*/
   #endregion
 
   #region PRIVATE IMPLEMENTATION
