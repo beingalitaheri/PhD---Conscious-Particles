@@ -134,12 +134,9 @@ public class CameraMouseController : MonoBehaviour {
         Vector3 p0 = _camera.ScreenToWorldPoint(new Vector3(0, 0, cameraSamplePos));
         Vector3 p1 = _camera.ScreenToWorldPoint(new Vector3(_camera.pixelWidth, 0, cameraSamplePos));
         float pixelsToMeter = _camera.pixelWidth / Vector3.Distance(p0, p1) * transform.lossyScale.x;
+        
+        if(Input.GetKey(KeyCode.LeftShift) == false){return;}
 
-#if UNITY_EDITOR
-        if(Input.GetKey(KeyCode.LeftControl) == false){return;}
-#elif UNITY_STANDALONE 
-        if(Input.GetKey(KeyCode.LeftAlt) == false){return;}
-#endif
       
             if (GUIUtility.hotControl == 0) {
                 if (Input.GetKey(MOVE_CODE) && !Input.GetKeyDown(MOVE_CODE)) {

@@ -2031,6 +2031,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114966711495576560, guid: 81683c81ff946cc47bac1de596cb0bbd,
         type: 3}
+      propertyPath: _speedToTrailLength.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114966711495576560, guid: 81683c81ff946cc47bac1de596cb0bbd,
+        type: 3}
       propertyPath: _speedToTrailLength.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}
