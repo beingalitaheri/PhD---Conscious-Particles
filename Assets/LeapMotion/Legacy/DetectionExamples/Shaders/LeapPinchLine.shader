@@ -8,9 +8,10 @@
     Tags { "RenderType" = "Opaque" }
     LOD 200
 
-    CGPROGRAM
+    HLSLPROGRAM
     #pragma surface surf Standard fullforwardshadows
     #pragma target 3.0
+    #include <UnityPBSLighting.cginc>
 
     struct Input {
       float4 color : COLOR;
@@ -25,7 +26,7 @@
       o.Metallic = _Metallic;
       o.Smoothness = _Glossiness;
     }
-    ENDCG
+    ENDHLSL
   }
   FallBack "Diffuse"
 }

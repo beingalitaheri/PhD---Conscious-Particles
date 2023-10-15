@@ -11,12 +11,13 @@
     Tags { "RenderType"="Opaque" }
     LOD 200
     
-    CGPROGRAM
+    HLSLPROGRAM
     #pragma multi_compile COLOR_SPECIES COLOR_SPECIES_MAGNITUDE COLOR_VELOCITY
     #pragma multi_compile _ ENABLE_INTERPOLATION
     #pragma multi_compile FISH_TAIL SQUASH_TAIL
     #pragma surface surf CelShadingForward vertex:vert noforwardadd
     #pragma target 2.0
+    #include <Lighting.cginc>
 
     sampler2D _ParticlePositions;
     sampler2D _ParticlePrevPositions;
@@ -107,7 +108,7 @@
     void surf (Input IN, inout SurfaceOutput  o) {
       o.Albedo = IN.color.rgb;
     }
-    ENDCG
+    ENDHLSL
   }
   FallBack "Diffuse"
 }

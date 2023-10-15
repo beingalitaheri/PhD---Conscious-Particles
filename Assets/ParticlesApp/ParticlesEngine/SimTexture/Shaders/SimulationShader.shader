@@ -299,10 +299,10 @@
         i.uv.y = i.uv.y / MAX_FORCE_STEPS + i.uv.z / MAX_FORCE_STEPS;
         half4 socialForce = tex2Dlod0(_ParticleSocialForces, i.uv.xy);
         velocity.xyz += socialForce.xyz * 0.1 * lerp(0, 1, velocity.w);
-
         //Damping
         //velocity.xyz *= lerp(1, i.uv.w, velocity.w);
-        velocity.xyz *= lerp(1, lerp(i.uv.w, 0.95, _ResetPercent), velocity.w);
+        float dampedUvw = lerp(i.uv.w, 0.95, _ResetPercent);
+        velocity.xyz *= lerp(1,dampedUvw , velocity.w);
 
         return velocity;
     }

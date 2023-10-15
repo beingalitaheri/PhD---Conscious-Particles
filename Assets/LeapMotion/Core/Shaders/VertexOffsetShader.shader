@@ -10,8 +10,10 @@
     Tags{ "RenderType" = "Opaque" }
     LOD 200
 
-    CGPROGRAM
+    HLSLPROGRAM
     #pragma surface surf Standard fullforwardshadows vertex:vert
+    #include <UnityPBSLighting.cginc>
+
     #include "Assets/LeapMotion/Core/Resources/LeapCG.cginc"
     #pragma target 3.0
 
@@ -39,7 +41,7 @@
       o.Smoothness = _Glossiness;
       o.Alpha = c.a;
     }
-    ENDCG
+    ENDHLSL
   }
   FallBack "Diffuse"
 }
