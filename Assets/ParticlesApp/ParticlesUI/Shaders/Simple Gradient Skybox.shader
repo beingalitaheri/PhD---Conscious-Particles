@@ -22,12 +22,12 @@
 
         #include "UnityCG.cginc"
 
-		    struct appdata {
+		    struct meshData {
 		      float4 position : POSITION;
 		      float3 texcoord : TEXCOORD0;
 	      };
 
-	      struct v2f {
+	      struct Interpolators {
 		      float4 position : SV_POSITION;
 		      float3 texcoord : TEXCOORD0;
 	      };
@@ -37,14 +37,14 @@
         half _HorizonOffset;
         half _Sharpness;
 
-	      v2f vert(appdata v) {
-		      v2f o;
+	      Interpolators vert(meshData v) {
+		      Interpolators o;
 		      o.position = UnityObjectToClipPos(v.position);
 		      o.texcoord = v.texcoord;
 		      return o;
 	      }
 
-	      half4 frag(v2f i) : COLOR {
+	      half4 frag(Interpolators i) : COLOR {
           float3 v = normalize(i.texcoord);
           half3 color = lerp(_HorizonColor, _SkyColor, smoothstep(0, 1, (v.y + _HorizonOffset) * _Sharpness));
           return half4(color.x, color.y, color.z, 1);

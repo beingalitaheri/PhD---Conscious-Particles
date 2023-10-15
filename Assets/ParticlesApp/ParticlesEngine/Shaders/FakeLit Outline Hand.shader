@@ -17,7 +17,7 @@
   float _Width;
   int _isLeftHand;
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
   };
@@ -27,11 +27,11 @@
     float3 normal : NORMAL;
   };
 
-  struct v2f {
+  struct Interpolators {
     float4 vertex : SV_POSITION;
   };
 
-  v2f_n vert_rev_extrude(appdata v) {
+  v2f_n vert_rev_extrude(meshData v) {
     v2f_n o;
     v.vertex = LeapGetLateVertexPos(v.vertex, _isLeftHand); // late-latch support
     o.vertex = UnityObjectToClipPos(v.vertex + float4(_Width * -1.0 * v.normal, 0));
@@ -39,8 +39,8 @@
     return o;
   }
 
-  v2f vert_extrude(appdata v) {
-    v2f o;
+  Interpolators vert_extrude(meshData v) {
+    Interpolators o;
     v.vertex = LeapGetLateVertexPos(v.vertex, _isLeftHand); // late-latch support
     o.vertex = UnityObjectToClipPos(v.vertex + float4(_Width * 0.0 * v.normal, 0));
     return o;
@@ -54,7 +54,7 @@
     return color;
   }
 
-  fixed4 frag_outline(v2f i) : SV_Target{
+  fixed4 frag_outline(Interpolators i) : SV_Target{
     return _Outline;
   }
 

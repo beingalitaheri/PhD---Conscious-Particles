@@ -19,24 +19,24 @@
 
         #include "UnityCG.cginc"
 
-		    struct appdata {
+		    struct meshData {
 		      float4 position : POSITION;
 		      float3 texcoord : TEXCOORD0;
 	      };
 
-	      struct v2f {
+	      struct Interpolators {
 		      float4 position : SV_POSITION;
 	      };
 
 	      half3 _SkyColor;
 
-	      v2f vert(appdata v) {
-		      v2f o;
+	      Interpolators vert(meshData v) {
+		      Interpolators o;
 		      o.position = UnityObjectToClipPos(v.position);
 		      return o;
 	      }
 
-	      half4 frag(v2f i) : COLOR {
+	      half4 frag(Interpolators i) : COLOR {
           return half4(_SkyColor.x, _SkyColor.y, _SkyColor.z, 1);
 	      }
 

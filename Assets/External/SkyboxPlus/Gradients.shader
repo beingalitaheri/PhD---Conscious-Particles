@@ -60,20 +60,20 @@ Shader "SkyboxPlus/Gradients"
         float4 vertex : POSITION;
     };
 
-    struct v2f {
+    struct Interpolators {
         float4 vertex : SV_POSITION;
         float3 texcoord : TEXCOORD0;
     };
 
-    v2f vert(appdata_t v)
+    Interpolators vert(appdata_t v)
     {
-        v2f o;
+        Interpolators o;
         o.vertex = UnityObjectToClipPos(v.vertex);
         o.texcoord = v.vertex.xyz;
         return o;
     }
 
-    half4 frag(v2f i) : SV_Target
+    half4 frag(Interpolators i) : SV_Target
     {
         half3 d = normalize(i.texcoord.xyz);
         half3 c = _BaseColor;

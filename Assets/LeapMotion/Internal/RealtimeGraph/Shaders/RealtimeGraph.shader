@@ -13,14 +13,14 @@
     float2 uv : TEXCOORD0;
   };
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float2 uv : TEXCOORD0;
   };
 
   fixed _Offset;
 
-  frag_in vert(appdata v){
+  frag_in vert(meshData v){
     frag_in o;
     o.position = UnityObjectToClipPos(v.vertex);
     o.uv = v.uv;

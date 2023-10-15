@@ -437,17 +437,15 @@ public class SimulationManager : MonoBehaviour {
         RestartSimulation(_currentDescription, ResetBehavior.None);
     }
 
-    public void RestartSimulation(EcosystemDescription ecosystemDescription,
-        ResetBehavior resetBehavior) {
+    public void RestartSimulation(EcosystemDescription ecosystemDescription, ResetBehavior resetBehavior) 
+    {
         var oldMethod = _currentSimulationMethod;
         var newMethod = _simulationMethod;
 
         _currentSimulationMethod = newMethod;
 
         isPerformingTransition = true;
-        if (OnEcosystemBeginTransition != null) {
-            OnEcosystemBeginTransition();
-        }
+        OnEcosystemBeginTransition?.Invoke();
 
         if (oldMethod != newMethod) {
             restartSimulator(oldMethod, EcosystemDescription.empty, resetBehavior);

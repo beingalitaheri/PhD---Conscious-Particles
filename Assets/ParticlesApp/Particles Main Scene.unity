@@ -1586,8 +1586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd66228b20306d49ad7f891f6269e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftFingertipsUniformParamId: 957
-  _rightFingertipsUniformParamId: 958
+  _leftFingertipsUniformParamId: 1091
+  _rightFingertipsUniformParamId: 1092
   _leftPalmTrisUniformParamId: 568
   _rightPalmTrisUniformParamId: 569
   _leftFingerSegmentsUniformParamId: 570

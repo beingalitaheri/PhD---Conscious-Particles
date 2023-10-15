@@ -37,14 +37,14 @@ Shader "SkyboxPlus/Cubemap"
         float4 vertex : POSITION;
     };
 
-    struct v2f {
+    struct Interpolators {
         float4 vertex : SV_POSITION;
         float3 texcoord : TEXCOORD0;
     };
 
-    v2f vert(appdata_t v)
+    Interpolators vert(appdata_t v)
     {
-        v2f o;
+        Interpolators o;
         float3x3 m = float3x3(_Rotation1.xyz, _Rotation2.xyz, _Rotation3.xyz);
         float4 vp = float4(mul(m, v.vertex.xyz), v.vertex.w);
         o.vertex = UnityObjectToClipPos(vp);
@@ -52,7 +52,7 @@ Shader "SkyboxPlus/Cubemap"
         return o;
     }
 
-    fixed4 frag(v2f i) : SV_Target
+    fixed4 frag(Interpolators i) : SV_Target
     {
 #ifdef _LOD_ON
         half4 tex = texCUBElod(_Tex, float4(i.texcoord, _LodLevel));

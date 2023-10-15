@@ -410,11 +410,12 @@ public class PresetGenerator : MonoBehaviour {
       colors[1] = new Color(1.0f, 1.0f, 0.0f);
       colors[2] = new Color(0.0f, 0.0f, 1.0f);
 
-      for (int s = 0; s < currentSimulationSpeciesCount; s++) {
+      for (int s = 0; s < currentSimulationSpeciesCount; s++) 
+      {
         speciesData[s] = new Vector3(drag, steps, collision);
-
-
-        for (int o = 0; o < currentSimulationSpeciesCount; o++) {
+        
+        for (int o = 0; o < currentSimulationSpeciesCount; o++) 
+        {
           socialData[s, o] = new Vector2(0.0f, epsilon);
         }
       }
@@ -447,11 +448,12 @@ public class PresetGenerator : MonoBehaviour {
       colors[1] = new Color(1.0f, 1.0f, 0.0f);
       colors[2] = new Color(0.0f, 0.0f, 1.0f);
 
-      for (int s = 0; s < currentSimulationSpeciesCount; s++) {
+      for (int s = 0; s < currentSimulationSpeciesCount; s++) 
+      {
         speciesData[s] = new Vector3(drag, steps, collision);
-
-
-        for (int o = 0; o < currentSimulationSpeciesCount; o++) {
+        
+        for (int o = 0; o < currentSimulationSpeciesCount; o++)
+        {
           socialData[s, o] = new Vector2(0.0f, epsilon);
         }
       }
@@ -1734,29 +1736,36 @@ steps = (int)( 5 * Random.value );
     }
 
 
-    EcosystemDescription description = new EcosystemDescription(isRandomDescription: false);
-    description.name = preset.ToString();
-    description.socialData = new SocialDescription[MAX_SPECIES, MAX_SPECIES];
-    description.speciesData = new SpeciesDescription[MAX_SPECIES];
-    description.toSpawn = new List<ParticleDescription>();
+    var description = new EcosystemDescription(isRandomDescription: false)
+    {
+      name = preset.ToString(),
+      socialData = new SocialDescription[MAX_SPECIES, MAX_SPECIES],
+      speciesData = new SpeciesDescription[MAX_SPECIES],
+      toSpawn = new List<ParticleDescription>()
+    };
 
-    for (int i = 0; i < MAX_SPECIES; i++) {
-      for (int j = 0; j < MAX_SPECIES; j++) {
+    for (int i = 0; i < MAX_SPECIES; i++)
+    {
+      for (int j = 0; j < MAX_SPECIES; j++)
+      {
         float force = socialData[i, j].x;
         float range = socialData[i, j].y;
 
-        if (range < SimulationManager.PARTICLE_DIAMETER) {
+        if (range < SimulationManager.PARTICLE_DIAMETER) 
+        {
           range = SimulationManager.PARTICLE_DIAMETER;
           force = 0;
         }
 
-        description.socialData[i, j] = new SocialDescription() {
+        description.socialData[i, j] = new SocialDescription
+        {
           socialForce = force,
           socialRange = range
         };
       }
 
-      description.speciesData[i] = new SpeciesDescription() {
+      description.speciesData[i] = new SpeciesDescription
+      {
         drag = speciesData[i].x,
         forceSteps = Mathf.RoundToInt(speciesData[i].y),
         collisionForce = speciesData[i].z,
@@ -1764,13 +1773,15 @@ steps = (int)( 5 * Random.value );
       };
     }
 
-    for (int i = 0; i < particlesToSimulate; i++) {
+    for (int i = 0; i < particlesToSimulate; i++) 
+    {
       int species = particleSpecies[i];
       if (species < 0) {
         species = (i % currentSimulationSpeciesCount);
       }
 
-      description.toSpawn.Add(new ParticleDescription() {
+      description.toSpawn.Add(new ParticleDescription() 
+      {
         position = particlePositions[i],
         velocity = particleVelocities[i],
         species = species

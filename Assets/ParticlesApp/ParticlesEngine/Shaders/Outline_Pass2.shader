@@ -10,22 +10,22 @@
   float4 _Color;
   float _Width;
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
   };
 
-  struct v2f {
+  struct Interpolators {
     float4 vertex : SV_POSITION;
   };
 
-  v2f vert_extrude(appdata v) {
-    v2f o;
+  Interpolators vert_extrude(meshData v) {
+    Interpolators o;
     o.vertex = UnityObjectToClipPos(v.vertex + float4(_Width * v.normal, 0));
     return o;
   }
 
-  fixed4 frag(v2f i) : SV_Target {
+  fixed4 frag(Interpolators i) : SV_Target {
     return _Color;
   }
 

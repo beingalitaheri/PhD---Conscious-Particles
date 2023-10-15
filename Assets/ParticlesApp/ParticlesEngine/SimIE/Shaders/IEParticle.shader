@@ -11,13 +11,13 @@ Shader "Particle Demo/IEParticle" {
   
   #pragma target 2.0
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
     UNITY_VERTEX_INPUT_INSTANCE_ID
   };
 
-  struct v2f {
+  struct Interpolators {
     float4 position : SV_POSITION;
     float4 color : COLOR;
     float3 normal : NORMAL;
@@ -31,17 +31,17 @@ Shader "Particle Demo/IEParticle" {
   sampler2D _ToonRamp;
   half4 _LightDir;
 
-  v2f vert(appdata v) {
+  Interpolators vert(meshData v) {
     UNITY_SETUP_INSTANCE_ID(v);
 
-    v2f o;
+    Interpolators o;
     o.position = UnityObjectToClipPos(v.vertex);
     o.color = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
     o.normal = normalize(mul(UNITY_MATRIX_IT_MV, float4(v.normal, 1)));
     return o;
   }
 
-  fixed4 frag(v2f i) : SV_Target {
+  fixed4 frag(Interpolators i) : SV_Target {
     half NdotL = dot(i.normal, _LightDir);
 
     NdotL = tex2D(_ToonRamp, float2(NdotL * 0.5 + 0.5, 0));

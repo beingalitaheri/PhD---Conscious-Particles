@@ -456,6 +456,8 @@ public class TextureSimulator : MonoBehaviour {
 
     [SerializeField]
     private Material _simulationMat;
+
+    [SerializeField] private Material testBlitMeshMat;
     public Material simulationMat {
         get { return _simulationMat; }
     }
@@ -586,7 +588,7 @@ public class TextureSimulator : MonoBehaviour {
     private RenderTexture _socialTemp;
 
     private Mesh _blitMeshQuad;
-    private Mesh _blitMeshInteraction;
+   [SerializeField] private Mesh _blitMeshInteraction;
     private Mesh _blitMeshParticle;
 
     private float _currScaledTime = 0;
@@ -1352,8 +1354,8 @@ public class TextureSimulator : MonoBehaviour {
         SocialDescription[,] socialData,
         bool includeRectUv)
     {
-        var verts = new List<Vector3>();
-        var tris = new List<int>();
+        var vertices = new List<Vector3>();
+        var triangles = new List<int>();
         var uv0 = new List<Vector4>();
         var uv1 = new List<Vector4>();
         var uv2 = new List<Vector4>();
@@ -1366,18 +1368,18 @@ public class TextureSimulator : MonoBehaviour {
                 var speciesM = rectM.species;
                 var speciesO = rectO.species;
 
-                tris.Add(verts.Count + 0);
-                tris.Add(verts.Count + 1);
-                tris.Add(verts.Count + 2);
+                triangles.Add(vertices.Count + 0);
+                triangles.Add(vertices.Count + 1);
+                triangles.Add(vertices.Count + 2);
 
-                tris.Add(verts.Count + 0);
-                tris.Add(verts.Count + 2);
-                tris.Add(verts.Count + 3);
+                triangles.Add(vertices.Count + 0);
+                triangles.Add(vertices.Count + 2);
+                triangles.Add(vertices.Count + 3);
 
-                verts.Add(new Vector3(rectM.x, rectM.y));
-                verts.Add(new Vector3(rectM.x + rectM.width, rectM.y));
-                verts.Add(new Vector3(rectM.x + rectM.width, rectM.y + rectM.height));
-                verts.Add(new Vector3(rectM.x, rectM.y + rectM.height));
+                vertices.Add(new Vector3(rectM.x, rectM.y));
+                vertices.Add(new Vector3(rectM.x + rectM.width, rectM.y));
+                vertices.Add(new Vector3(rectM.x + rectM.width, rectM.y + rectM.height));
+                vertices.Add(new Vector3(rectM.x, rectM.y + rectM.height));
 
                 float uvMx0 = rectM.x / (float)SimulationManager.TEXTURE_SIZE;
                 float uvMx1 = (rectM.x + rectM.width) / (float)SimulationManager.TEXTURE_SIZE;
@@ -1391,11 +1393,15 @@ public class TextureSimulator : MonoBehaviour {
                 float uvOy0 = rectO.y / (float)SimulationManager.TEXTURE_SIZE;
                 float uvOy1 = (rectO.y + rectO.height) / (float)SimulationManager.TEXTURE_SIZE;
 
+                // Center Gravity
                 uv0.Add(new Vector4(uvMx0, uvMy0, uvOx0, uvOy0));
                 uv0.Add(new Vector4(uvMx1, uvMy0, uvOx0, uvOy0));
                 uv0.Add(new Vector4(uvMx1, uvMy1, uvOx0, uvOy0));
                 uv0.Add(new Vector4(uvMx0, uvMy1, uvOx0, uvOy0));
-
+                ////    
+                
+                
+                // Social Behaviours
                 Vector4 social;
                 social.x = socialData[speciesM, speciesO].socialForce * socialScalar;
                 social.y = socialData[speciesM, speciesO].socialRange;
@@ -1406,6 +1412,7 @@ public class TextureSimulator : MonoBehaviour {
                 uv1.Add(social);
                 uv1.Add(social);
                 uv1.Add(social);
+                ////
 
                 uv2.Add(new Vector4(uvOx0, uvOy0, uvOx1, uvOy1));
                 uv2.Add(new Vector4(uvOx0, uvOy0, uvOx1, uvOy1));
@@ -1415,8 +1422,8 @@ public class TextureSimulator : MonoBehaviour {
         }
 
         _blitMeshInteraction.Clear();
-        _blitMeshInteraction.SetVertices(verts);
-        _blitMeshInteraction.SetTriangles(tris, 0, calculateBounds: true);
+        _blitMeshInteraction.SetVertices(vertices);
+        _blitMeshInteraction.SetTriangles(triangles, 0, calculateBounds: true);
         _blitMeshInteraction.SetUVs(0, uv0);
         _blitMeshInteraction.SetUVs(1, uv1);
         if (includeRectUv) {
@@ -1424,25 +1431,25 @@ public class TextureSimulator : MonoBehaviour {
         }
         _blitMeshInteraction.UploadMeshData(markNoLongerReadable: false);
 
-        verts.Clear();
-        tris.Clear();
+        vertices.Clear();
+        triangles.Clear();
         uv0.Clear();
         uv1.Clear();
         uv2.Clear();
 
         foreach (var rect in layout) {
-            tris.Add(verts.Count + 0);
-            tris.Add(verts.Count + 1);
-            tris.Add(verts.Count + 2);
+            triangles.Add(vertices.Count + 0);
+            triangles.Add(vertices.Count + 1);
+            triangles.Add(vertices.Count + 2);
 
-            tris.Add(verts.Count + 0);
-            tris.Add(verts.Count + 2);
-            tris.Add(verts.Count + 3);
+            triangles.Add(vertices.Count + 0);
+            triangles.Add(vertices.Count + 2);
+            triangles.Add(vertices.Count + 3);
 
-            verts.Add(new Vector3(rect.x, rect.y));
-            verts.Add(new Vector3(rect.x + rect.width, rect.y));
-            verts.Add(new Vector3(rect.x + rect.width, rect.y + rect.height));
-            verts.Add(new Vector3(rect.x, rect.y + rect.height));
+            vertices.Add(new Vector3(rect.x, rect.y));
+            vertices.Add(new Vector3(rect.x + rect.width, rect.y));
+            vertices.Add(new Vector3(rect.x + rect.width, rect.y + rect.height));
+            vertices.Add(new Vector3(rect.x, rect.y + rect.height));
 
             float socialSteps = speciesData[rect.species].forceSteps;
             float dragMult = 1.0f - speciesData[rect.species].drag;    //use 1-drag so we can just multiply by it in shader
@@ -1459,28 +1466,28 @@ public class TextureSimulator : MonoBehaviour {
         }
 
         _blitMeshParticle.Clear();
-        _blitMeshParticle.SetVertices(verts);
-        _blitMeshParticle.SetTriangles(tris, 0, calculateBounds: true);
+        _blitMeshParticle.SetVertices(vertices);
+        _blitMeshParticle.SetTriangles(triangles, 0, calculateBounds: true);
         _blitMeshParticle.SetUVs(0, uv0);
         _blitMeshParticle.UploadMeshData(markNoLongerReadable: false);
 
-        verts.Clear();
-        tris.Clear();
+        vertices.Clear();
+        triangles.Clear();
         uv0.Clear();
         uv1.Clear();
 
-        tris.Add(0);
-        tris.Add(1);
-        tris.Add(2);
+        triangles.Add(0);
+        triangles.Add(1);
+        triangles.Add(2);
 
-        tris.Add(0);
-        tris.Add(2);
-        tris.Add(3);
+        triangles.Add(0);
+        triangles.Add(2);
+        triangles.Add(3);
 
-        verts.Add(new Vector3(0, 0, 0));
-        verts.Add(new Vector3(_textureDimension, 0, 0));
-        verts.Add(new Vector3(_textureDimension, _textureDimension, 0));
-        verts.Add(new Vector3(0, _textureDimension, 0));
+        vertices.Add(new Vector3(0, 0, 0));
+        vertices.Add(new Vector3(_textureDimension, 0, 0));
+        vertices.Add(new Vector3(_textureDimension, _textureDimension, 0));
+        vertices.Add(new Vector3(0, _textureDimension, 0));
 
         uv0.Add(new Vector4(0, 0, 0, 0));
         uv0.Add(new Vector4(1, 0, 0, 0));
@@ -1488,8 +1495,8 @@ public class TextureSimulator : MonoBehaviour {
         uv0.Add(new Vector4(0, 1, 0, 0));
 
         _blitMeshQuad.Clear();
-        _blitMeshQuad.SetVertices(verts);
-        _blitMeshQuad.SetTriangles(tris, 0, calculateBounds: true);
+        _blitMeshQuad.SetVertices(vertices);
+        _blitMeshQuad.SetTriangles(triangles, 0, calculateBounds: true);
         _blitMeshQuad.SetUVs(0, uv0);
         _blitMeshQuad.UploadMeshData(markNoLongerReadable: false);
     }
@@ -1533,8 +1540,12 @@ public class TextureSimulator : MonoBehaviour {
         }
 
         _simulationMat.SetInt("_SphereCount", sphereCount);
+        _simulationMat.SetInt("_SphereCount", sphereCount);
+        _simulationMat.SetVectorArray("_Spheres", _spheres);
         _simulationMat.SetVectorArray("_Spheres", _spheres);
         _simulationMat.SetMatrixArray("_SphereDeltas", _sphereDeltas);
+        _simulationMat.SetMatrixArray("_SphereDeltas", _sphereDeltas);
+        _simulationMat.SetFloat("_SphereForce", influenceForce);
         _simulationMat.SetFloat("_SphereForce", influenceForce);
     }
 
@@ -1885,17 +1896,19 @@ public class TextureSimulator : MonoBehaviour {
         return tex;
     }
 
-    private void stepSimulation(float framePercent) {
-        if (_provider != null) {
+    private void stepSimulation(float framePercent) 
+    {
+        if (_provider != null)
+        {
             doHandCollision();
-
             doHandInfluenceStateUpdate(framePercent);
         }
 
         for (int i = 0; i < _manager.stepsPerTick; i++) {
             Graphics.ExecuteCommandBuffer(_simulationCommands[_commandIndex]);
             _commandIndex++;
-            if (_commandIndex == _simulationCommands.Count) {
+            if (_commandIndex == _simulationCommands.Count)
+            {
                 _commandIndex = 0;
             }
         }
@@ -1990,7 +2003,11 @@ public class TextureSimulator : MonoBehaviour {
 
         //Set up the destination texture as the new source
         buffer.SetGlobalTexture(propertyName, dst);
-
+        
+       // var meshInstance = new GameObject(mesh.name, new[] { typeof(MeshFilter),typeof(MeshRenderer) });
+       // meshInstance.GetComponent<MeshFilter>().sharedMesh = mesh;
+       // meshInstance.GetComponent<MeshRenderer>().sharedMaterial = testBlitMeshMat;
+        
         //Swap the textures to that the next time we come around it goes the opposite way
         Utils.Swap(ref src, ref dst);
     }
@@ -2009,6 +2026,10 @@ public class TextureSimulator : MonoBehaviour {
         //Draw the special interaction mesh
         buffer.DrawMesh(_blitMeshInteraction, Matrix4x4.identity, _simulationMat, 0, PASS_UPDATE_COLLISIONS);
 
+        /*var meshInstance = new GameObject("BlitMeshInteraction", new[] { typeof(MeshFilter),typeof(MeshRenderer) });
+        meshInstance.GetComponent<MeshFilter>().sharedMesh = _blitMeshInteraction;
+        meshInstance.GetComponent<MeshRenderer>().sharedMaterial = testBlitMeshMat;*/
+        
         //Set the new velocity texture as the new global
         buffer.SetGlobalTexture(PROP_VELOCITY_GLOBAL, _velocityDst);
 

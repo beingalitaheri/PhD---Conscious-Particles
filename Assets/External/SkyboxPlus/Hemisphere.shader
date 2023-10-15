@@ -20,20 +20,20 @@ Shader "SkyboxPlus/Hemisphere"
         float4 vertex : POSITION;
     };
 
-    struct v2f {
+    struct Interpolators {
         float4 vertex : SV_POSITION;
         float3 texcoord : TEXCOORD0;
     };
 
-    v2f vert(appdata_t v)
+    Interpolators vert(appdata_t v)
     {
-        v2f o;
+        Interpolators o;
         o.vertex = UnityObjectToClipPos(v.vertex);
         o.texcoord = v.vertex.xyz;
         return o;
     }
 
-    half4 frag(v2f i) : SV_Target
+    half4 frag(Interpolators i) : SV_Target
     {
         half t1 = max(+i.texcoord.y, 0);
         half t2 = max(-i.texcoord.y, 0);

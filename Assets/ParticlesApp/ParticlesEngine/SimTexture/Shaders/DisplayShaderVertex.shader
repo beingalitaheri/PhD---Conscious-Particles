@@ -15,13 +15,13 @@
   #pragma multi_compile _ COLOR_LERP
   #pragma target 2.0
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
     float4 texcoord : TEXCOORD0;
   };
 
-  struct v2f {
+  struct Interpolators {
     float4 position : SV_POSITION;
     float4 color : COLOR;
     float3 normal : NORMAL;
@@ -110,7 +110,7 @@
 
   int _Threshold;
 
-  v2f vert(appdata v) {
+  Interpolators vert(meshData v) {
     float4 texcoord = v.texcoord;
 
 #ifdef COLOR_LERP
@@ -133,14 +133,14 @@
 
     calculateParticleColor(color, particle.w, velocity);
 
-    v2f o;
+    Interpolators o;
     o.position = UnityObjectToClipPos(v.vertex);
     o.normal = v.normal;
     o.color = color;
     return o;
   }
 
-  fixed4 frag(v2f i) : SV_Target {
+  fixed4 frag(Interpolators i) : SV_Target {
     half NdotL = dot(i.normal, _LightDir);
 
     NdotL = tex2D(_ToonRamp, float2(NdotL * 0.5 + 0.5, 0));
@@ -148,7 +148,7 @@
     return i.color *NdotL;
   }
 
-  fixed4 frag_back(v2f i) : SV_Target {
+  fixed4 frag_back(Interpolators i) : SV_Target {
     return i.color;
   }
   ENDCG

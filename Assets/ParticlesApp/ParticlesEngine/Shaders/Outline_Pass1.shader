@@ -8,22 +8,22 @@
 
   float4 _Color;
 
-  struct appdata {
+  struct meshData {
     float4 vertex : POSITION;
     float3 normal : NORMAL;
   };
 
-  struct v2f {
+  struct Interpolators {
     float4 vertex : SV_POSITION;
   };
 
-  v2f vert(appdata v) {
-    v2f o;
+  Interpolators vert(meshData v) {
+    Interpolators o;
     o.vertex = UnityObjectToClipPos(v.vertex);
     return o;
   }
 
-  fixed4 frag(v2f i) : SV_Target {
+  fixed4 frag(Interpolators i) : SV_Target {
     return _Color;
   }
 
