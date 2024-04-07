@@ -82,7 +82,13 @@ public class SimulationManager : MonoBehaviour {
         get { return _fieldForce; }
         set { _fieldForce = value; }
     }
-
+    [Range(0, 1f)]
+    [SerializeField]
+    private float _handFieldForce = 0.0005f;
+    public float handFieldForce {
+        get { return _handFieldForce; }
+        set { _handFieldForce = value; }
+    }
     [MinMax(0, 1)]
     [SerializeField]
     private Vector2 _headRadiusRange = new Vector2(0.15f, 0.15f);

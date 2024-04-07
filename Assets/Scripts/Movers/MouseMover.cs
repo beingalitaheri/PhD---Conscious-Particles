@@ -6,7 +6,7 @@ namespace Movers
     public class MouseMover : MonoBehaviour
     {
         private Camera mainCamera;
-
+        [SerializeField] private Vector3 offset;
         private void Start()
         {
             mainCamera = Camera.main;
@@ -17,7 +17,7 @@ namespace Movers
             var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray,out var hit, 100,LayerMask.GetMask("Default")))
             {
-                transform.position = hit.point;
+                transform.position = hit.point + offset;
             }
                 
         }

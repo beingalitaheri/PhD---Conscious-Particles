@@ -1848,6 +1848,7 @@ public class TextureSimulator : MonoBehaviour {
         _simulationMat.SetVector("_FieldCenter", _manager.fieldCenter);
         _simulationMat.SetFloat("_FieldRadius", _manager.fieldRadius);
         _simulationMat.SetFloat("_FieldForce", _manager.fieldForce);
+        _simulationMat.SetFloat("_HandFieldForce", _manager.handFieldForce);
 
         _displayBlock.SetFloat("_Size", _manager.particleRadius);
         _displayBlock.SetFloat("_Brightness", _manager.particleBrightness);

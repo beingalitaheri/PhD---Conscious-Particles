@@ -84,7 +84,6 @@ namespace Leap.Unity.Examples {
       }
       else {
         var framePose = hand.GetPalmPose();
-
         if (!maybeCurPose.HasValue) {
           // The hand just started being tracked.
           maybePrevPose = null;

@@ -78,6 +78,7 @@
     uniform half3 _FieldCenter;
     uniform half _FieldRadius;
     uniform half _FieldForce;
+    uniform half _HandFieldForce;
     uniform float3 _HeadPos;
     uniform half _HeadRadius;
 
@@ -210,7 +211,13 @@
         {
             velocity.xyz += toFieldCenter * _FieldForce;
         }
-
+         //Attraction towards the Hand
+        half3 toHandCenter = _HeadPos - particle.xyz;
+        half distToHand = length(toHandCenter);
+        if (distToHand > _FieldRadius)
+        {
+            velocity.xyz += toHandCenter * _HandFieldForce;
+        }
         //Grasping by spheres
         {
             half4 sphereForce = half4(0, 0, 0, 0);

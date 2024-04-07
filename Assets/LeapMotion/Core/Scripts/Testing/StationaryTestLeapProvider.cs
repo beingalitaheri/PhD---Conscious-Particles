@@ -7,6 +7,8 @@
  * between Leap Motion and you, your company or other organization.           *
  ******************************************************************************/
 
+using UnityEngine;
+
 namespace Leap.Unity {
 
   public class StationaryTestLeapProvider : LeapProvider {
@@ -15,7 +17,6 @@ namespace Leap.Unity {
 
     private Hand _leftHand;
     private Hand _rightHand;
-
     public override Frame CurrentFrame {
       get {
         return _curFrame;
