@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Simulation"
+﻿Shader "Unlit/Simulation(HandAttraction )"
 {
     Properties {}
 
@@ -210,6 +210,13 @@
         if (dist > _FieldRadius)
         {
             velocity.xyz += toFieldCenter * _FieldForce;
+        }
+         //Attraction towards the Hand
+        half3 toHandCenter = _HeadPos - particle.xyz;
+        half distToHand = length(toHandCenter);
+        if (distToHand > _FieldRadius)
+        {
+            velocity.xyz += toHandCenter * _HandFieldForce;
         }
         //Grasping by spheres
         {
